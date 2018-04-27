@@ -1,10 +1,10 @@
 language: node_js
 node_js:
-- 8.4.0
+- "8.4.0"
 sudo: required
 cache:
   directories:
-  - node_modules
+    - node_modules
 before_install:
 - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 - npm i -D uglifyjs-webpack-plugin
@@ -12,12 +12,9 @@ install:
 - npm install
 - npm run ng-deploy
 - ls -l
+- docker build -t junyuzhou/se234-lab11-frontend .
+- docker push junyuzhou/se234-lab11-frontend
 script:
-- docker build -t dto80/234-lab11 .
-- docker push dto80/234-lab11
+- docker-compose -H "$DOCKER_HOST" up -d
+
 service: docker
-env:
-  global:
-  - secure: pYQDkKS55NXsnhX6wLsoHhWVTP/bzULMrH3OZrQ2vuSf7rmJ2czt469AjKwmCF3waKbJcFRPM4Ov333W6EZTpYNc10y6xGQjvnNV6I2Jj6+ifbyGNUGLrXJtA3KZJhfJjvsefIYqWC2wmWZPPnNpjK1+KPUnxmq/YvLFfp9MmxeE2zzZd26+skYLqdiMDB1oGvIzBzXnrWXHza61GSXlag8G7O+umfkSs/ThQLNE28JmOALgBi8XeqGhcHbd5J1o/wtz60lDjjOsSRs+l+dBP6kNn3aSQyP4465Ch3KHw0Jw6c6yhPSLgfBHjGbIMhiKkFkJUfsOByOioDk9bOpxKxoNhz+ukilmnGYf2r5Gg7s2ikycJWeeWyG3aFOuCiZlMxG2Gv7Kz0ddyz//k8wxitviBzpPI/2mfBQVC2sUOtViEtyeL3uMEj5sqRMrFh5JH/s8gjD6foDKwDxHWoFLhqu/UMoTEqvRvEbsC18UpWztxOdkElkQMP54e3LJ8ZXlx8kYth8iMZ1qyjN0y8now+Zs9DanTy+atBZ+9dw7t0bf0CAo3l5xzl1A0taLdbCcDthbUpNWbekqjgyiBnt2pTI5bQiL8RqR8Mpqu9VVdioBD6xzM2+GiAgfBn5Bb/BNIXdVeyFGEn2GfEb47T7Z6w23bYIt8ynA0xw2Q7zTuBE=
-  - secure: bReino4OH4f/wrafNGgLC0Hb40dYF29sjQ5auzN+jTilkGNxynveCsmVlq4BHscFtOa1ckyAZj8KHteIBwBWfy+KyjjyBgZLVI6d1fwO79uw+D51+HCkVHgNnpYvXmEnhRbdJriS9nke2w548CXCNfplCjdX6pvW91bWTCJic1i4NiKiYqiJ0gZ3L9TA+QXA4yfVPH60l/eyqLV3msiDGOb76otTNZ2K/uFg5FVU9pjlRMri7FpWJzr3v85cwog67BR5QnFjCnsjO8KYlGxafeNDEeqKoKkjGLeR7LBOJeWIwDevaEIvChkZ7MYmAFVLZ3EcYghIYL6ZkEJp4pfM/l3SVpboLp9y+GgXzbvdSh8M+4S+FjO96jO6ueo6es9NaJBJGAp+fuRogmBtDVqHeMbQuff4Uy2T3fibnatYmDj+1K4pqhuC0Z/YdsrUHWmP00DjdiUGNH+TQlMYZSpGz/Svq8DC3LRW38TUTw9GmV0/hmO0Ju4JUZtPGSBoXx2ePv5LLZDVrGQ/0f5vor5wE+maxVnghusL12hD1QEznfGR3LS+4pGUzPfuvRMRpCBQzu+fPDhaDynMWT39eLh/+40eEwpy7fiDZ6TYAFfKZ41AfsNZ12jPNLGO6ZT+BGWPpYzRgdj4nW+WxUDLSWN4r9O9JuO+b9s3nNI04c3UehE=
-  - secure: DzlaEGr+QBA2H5djklPCacUsk9xNly4LbAkLgPi/mLs90qVstrUOIMD8Z/rWREuA6Nau7rPlxpy0bVk32C/bOyHThnbrfEPDyExFC87PjKoAjNzhDMV68cHq4ALXF0Y7h4KomN4Tn/Fg+Ha9Bw1FMul4wm1bjWPyAgn9aH1PdVhnGlKwdW4LkKHNnOihJPq9AZj9byH11M00Xf1IDA6LIkuVFPeAoCOydK6bHYWPOhXpW9KxEHThQUc6VMPknoLP1VDBHRATT242i5sfSvVWDkslEqqaKHccXvDBsAd5W1vr3CBU8N41oGN6S0Hv0AWu06KC7llCvjDHplBYmHj7phFD4MJa+Fn3n1uE+2p34Vz5cShAOeo4Uk1S+Ie57Dj4Jhf1es1gYSJ//V/iZW7Tgme0EP7udPv7nnVokKT4J4b1zob1QEEa8xYRJiIWBcCP7NkUxPqfPryc8HAewckyiLuuuw3c716Zi7tD+hoH3d8HypWohLJCwABbsXWp6SaSe9wFEz3ib4F3LgibSQKWayvlxXAmjNjYm5csnUDkLPtYKfyFTNuts3uRKJT4eF07NWVn1OwUt5oCJr244p5o1s75I688Cu3zw8Koih3WPrZ+y9oQp2JZ1RVXK6H29wMKyAUCi6rnEX3mhGNlu+JSSABvPXjONPw4e+0TZNf/D+o=
